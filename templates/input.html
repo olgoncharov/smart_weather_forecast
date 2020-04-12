@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content_title %}
+  Choose your {{ field_name }}
+{% endblock %}
+
+{% block content %}
+<form>
+  <div class="form-group">
+    <select class="form-control form-control-lg">
+      <option>Large select</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">{{ button_name }}</button>
+</form>
+{% endblock %}
