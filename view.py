@@ -1,7 +1,13 @@
-from flask import render_template, redirect, url_for, request
+import os
+
+from dotenv import load_dotenv
+from flask import redirect, render_template, request, url_for
 
 from app import app
 from models import Country, Region
+
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
 
 
 @app.route('/', methods=['POST', 'GET'])
