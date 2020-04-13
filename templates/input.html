@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container col-6">
 <form method="post">
   <div class="form-group">
     <select class="form-control form-control-lg" name="{{ field_name }}">
@@ -14,11 +15,12 @@
       {% endfor %}
     </select>
   </div>
-  <div class="btn-toolbar justify-content-between">
+  <div class="btn-toolbar justify-content-center">
     {% if backlink %}
-    <a href="{{ backlink }}" class="btn btn-primary" role="button"><< back</a>
+    <a href="{{ backlink }}" class="btn btn-primary mx-4" role="button"><< back</a>
     {% endif %}
-    <button type="submit" class="btn btn-primary">next >></button>
+    <button type="submit" class="btn btn-primary mx-4">next >></button>
   </div>
 </form>
+</div>
 {% endblock %}
