@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content_title %}
+  Forecast in {{ city }}
+{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Temperature, Celsius</th>
+      <th scope="col">Pressure, hPa</th>
+      <th scope="col">Humidity, %</th>
+      <th scope="col">Cloudiness, %</th>
+      <th scope="col">Wind speed, m/sec</th>
+      <th scope="col">Wind direction, degrees</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in list %}
+    <tr>
+      <td>{{ item["dt_txt"] }}</td>
+      <td>{{ item["main"]["temp"] }}</td>
+      <td>{{ item["main"]["pressure"] }}</td>
+      <td>{{ item["main"]["humidity"] }}</td>
+      <td>{{ item["clouds"]["all"] }}</td>
+      <td>{{ item["wind"]["speed"] }}</td>
+      <td>{{ item["wind"]["deg"] }}</td>
+      <td>
+        {% for weather in item["weather"] %}
+        {{ weather.description }}
+        {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
