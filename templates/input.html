@@ -5,12 +5,15 @@
 {% endblock %}
 
 {% block content %}
-<form>
+<form method="post">
   <div class="form-group">
-    <select class="form-control form-control-lg">
-      <option>Large select</option>
+    <select class="form-control form-control-lg" name="{{ field_name }}">
+      <option value="">------------------</option>
+      {% for item in items %}
+      <option value="{{ item.id }}">{{ item.name }}</option>
+      {% endfor %}
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">{{ button_name }}</button>
+  <button type="submit" class="btn btn-primary">Next</button>
 </form>
 {% endblock %}
