@@ -40,7 +40,8 @@ def choose_region(country_slug):
     return render_template(
         'input.html',
         field_name='region',
-        items=sorted(country.regions, key=lambda region: region.name)
+        items=sorted(country.regions, key=lambda region: region.name),
+        backlink=url_for('index')
     )
 
 
@@ -51,7 +52,8 @@ def choose_city(country_slug, region_id):
     return render_template(
         'input.html',
         field_name='city',
-        items=sorted(region.cities, key=lambda city: city.name)
+        items=sorted(region.cities, key=lambda city: city.name),
+        backlink=url_for('choose_region', country_slug=country_slug)
     )
 
 
