@@ -10,7 +10,7 @@ def index():
     if request.method == 'POST':
         country_id = request.form['country']
         if country_id != '':
-            country = Country.query.filter_by(id=country_id).first()
+            country = Country.query.filter_by(id=country_id).first_or_404()
             return redirect(url_for(
                 'choose_region',
                 country_slug=country.alpha_2
@@ -26,7 +26,7 @@ def index():
 @app.route('/<country_slug>', methods=['POST', 'GET'])
 def choose_region(country_slug):
 
-    country = Country.query.filter_by(alpha_2=country_slug).first()
+    country = Country.query.filter_by(alpha_2=country_slug).first_or_404()
 
     if request.method == 'POST':
         region_id = request.form['region']
@@ -46,10 +46,15 @@ def choose_region(country_slug):
 
 @app.route('/<country_slug>/<region_id>', methods=['POST', 'GET'])
 def choose_city(country_slug, region_id):
-    region = Region.query.filter_by(id=region_id).first()
+    region = Region.query.filter_by(id=region_id).first_or_404()
 
     return render_template(
         'input.html',
         field_name='city',
         items=sorted(region.cities, key=lambda city: city.name)
     )
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
