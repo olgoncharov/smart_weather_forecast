@@ -1,10 +1,11 @@
 import os
+import requests
 
 from dotenv import load_dotenv
 from flask import redirect, render_template, request, url_for
 
-from app import app
-from models import Country, Region
+from app import app, cache
+from models import Country, Region, City
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -26,6 +27,32 @@ def index():
         'input.html',
         field_name='country',
         items=Country.query.order_by('name').all()
+    )
+
+
+@app.route('/city/<city_id>')
+@cache.cached(timeout=600)
+def weather_in_city(city_id):
+    city = City.query.filter_by(id=city_id).first_or_404()
+    url = 'http://api.openweathermap.org/data/2.5/forecast'
+    params = {
+        'APPID': API_KEY,
+        'lat': city.lat,
+        'lon': city.lng,
+        'units': 'metric'
+    }
+    print(params)
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+    except:
+        return render_template('500.html')
+
+    return render_template(
+        'forecast.html',
+        city=city.name,
+        list=data['list']
     )
 
 
@@ -54,6 +81,14 @@ def choose_region(country_slug):
 @app.route('/<country_slug>/<region_id>', methods=['POST', 'GET'])
 def choose_city(country_slug, region_id):
     region = Region.query.filter_by(id=region_id).first_or_404()
+
+    if request.method == 'POST':
+        city_id = request.form['city']
+        if city_id != '':
+            return redirect(url_for(
+                'weather_in_city',
+                city_id=city_id
+            ))
 
     return render_template(
         'input.html',
