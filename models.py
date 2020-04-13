@@ -1,4 +1,5 @@
 from sqlalchemy.orm import relationship
+
 from app import db
 
 
@@ -25,4 +26,3 @@ class City(db.Model):
     lat = db.Column(db.Float())
     lng = db.Column(db.Float())
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
-
