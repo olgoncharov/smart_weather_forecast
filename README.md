@@ -52,3 +52,18 @@
 10) На основе полученного от API ответа формируется и отправляется пользователю HTML-страница с таблицей прогноза погоды.
 
 ### 4. Запуск программы
+Склонируйте репозиторий с github
+```bash
+git clone https://github.com/olgoncharov/smart_weather_forecast.git
+```
+В папке проекта создайте и активируйте виртуальное окружение.
+
+Linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Windows:
+```
+venv/Scripts/activate.bat
+```
