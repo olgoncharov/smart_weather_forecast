@@ -65,5 +65,17 @@ source venv/bin/activate
 ```
 Windows:
 ```
+python -m venv venv
 venv/Scripts/activate.bat
 ```
+Установите необходимые библиотеки
+```bash
+pip install -r requirements.txt
+```
+В папке с проектом создайте файл `.env` и запишите в нем строку `API_KEY=...`, указав ваш ключ к OpenWeather API
+
+Запустите приложение командой
+```bash
+python main.py
+```
+Для запуска сервиса откройте в браузере страницу http://localhost:5000
