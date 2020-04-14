@@ -12,7 +12,7 @@
 
 Бэкенд сервиса разработан на языке **Python** с использованием следующих фреймворков:
 * Flask (1.1.2)
-* SQLAlchemy
+* SQLAlchemy (1.3.16)
 
 Для хранения данных стран, регионов и городов использована база данных **SQLite**.
 
@@ -38,6 +38,9 @@
    * Description - краткое текстовое описание погоды
 
 ### 2. Демонстрация работы сервиса
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=qUySICxvLUA
+" target="_blank"><img src="http://img.youtube.com/vi/qUySICxvLUA/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="480" height="360" border="10" /></a>
 
 ### 3. Процесс работы программы
 1) Пользователь открывает главную страницу сайта, на сервер отправляется GET-запрос.
@@ -66,7 +69,7 @@ source venv/bin/activate
 Windows:
 ```
 python -m venv venv
-venv/Scripts/activate.bat
+"venv/Scripts/activate.bat"
 ```
 Установите необходимые библиотеки
 ```bash
