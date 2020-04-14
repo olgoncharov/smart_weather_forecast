@@ -1,11 +1,11 @@
 import os
-import requests
 
+import requests
 from dotenv import load_dotenv
 from flask import redirect, render_template, request, url_for
 
 from app import app, cache
-from models import Country, Region, City
+from models import City, Country, Region
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -13,7 +13,6 @@ API_KEY = os.getenv('API_KEY')
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-
     if request.method == 'POST':
         country_id = request.form['country']
         if country_id != '':
@@ -58,7 +57,6 @@ def weather_in_city(city_id):
 
 @app.route('/<country_slug>', methods=['POST', 'GET'])
 def choose_region(country_slug):
-
     country = Country.query.filter_by(alpha_2=country_slug).first_or_404()
 
     if request.method == 'POST':
